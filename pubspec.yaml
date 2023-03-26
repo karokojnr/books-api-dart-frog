@@ -7,7 +7,6 @@ environment:
   sdk: ">=2.19.0 <3.0.0"
 
 dependencies:
-  crypto: ^3.0.2
   dart_frog: ^0.3.0
   encrypt: ^5.0.1
   jaguar_jwt: ^3.0.0
