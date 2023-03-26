@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:dart_frog/dart_frog.dart';
 
-import '../../helpers/encryption.dart';
+import '../../helpers/helpers.dart';
 import '../../models/models.dart';
 import '../../services/mongo_service.dart';
 
@@ -11,14 +11,16 @@ Future<Response> onRequest(RequestContext context) async {
 
     final mongoService = await context.read<Future<MongoService>>();
 
-    if (request.method == HttpMethod.get) {
+    if (request.method == HttpMethod.post) {
       await mongoService.open();
 
       final requestBody = await request.body();
       final requestData = jsonDecode(requestBody) as Map<String, dynamic>;
 
       final user = User.fromMap(requestData);
-      user.password = Encryption.encrypt(user.password).base64;
+      user.password = hashPassword(
+        user.password,
+      );
 
       final userCollection = mongoService.database.collection('users');
 

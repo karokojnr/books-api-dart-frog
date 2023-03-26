@@ -12,7 +12,7 @@ Future<Response> onRequest(RequestContext context) async {
   try {
     final request = context.request;
 
-    if (request.method == HttpMethod.get) {
+    if (request.method == HttpMethod.post) {
       await mongoDbService.open();
 
       final requestBody = await request.body();
@@ -34,8 +34,10 @@ Future<Response> onRequest(RequestContext context) async {
         );
       }
       final foundUserPassword = foundUser['password'] as String;
-      final decryptedPassword = Decryption.decrypt(foundUserPassword);
-      if (user.password != decryptedPassword) {
+      final hashedPassword = hashPassword(
+        user.password,
+      );
+      if (hashedPassword != foundUserPassword) {
         return Response.json(
           statusCode: 400,
           body: {
