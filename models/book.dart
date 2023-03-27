@@ -39,4 +39,8 @@ List<Map<String, dynamic>> books = [
     'title': 'Always start with why',
     'authors': ['Simon Sinek']
   },
+  {
+    'title': 'To Kill a Mockingbird',
+    'authors': ['Harper Lee'],
+  }
 ];
