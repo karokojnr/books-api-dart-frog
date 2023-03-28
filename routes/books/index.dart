@@ -3,7 +3,6 @@ import '../../models/models.dart';
 
 Response onRequest(RequestContext context) {
   final isAuthenticated = context.read<bool>();
-
   if (isAuthenticated) {
     try {
       final request = context.request;
