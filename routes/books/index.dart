@@ -1,7 +1,7 @@
 import 'package:dart_frog/dart_frog.dart';
 import '../../models/models.dart';
 
-Future<Response> onRequest(RequestContext context) async {
+Response onRequest(RequestContext context) {
   final isAuthenticated = context.read<bool>();
 
   if (isAuthenticated) {
