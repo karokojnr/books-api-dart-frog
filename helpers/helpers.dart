@@ -1,2 +1,2 @@
-export 'auth_middleware.dart';
+export 'authorization.dart';
 export 'hash.dart';

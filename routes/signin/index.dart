@@ -1,9 +1,7 @@
 import 'dart:convert';
 
 import 'package:dart_frog/dart_frog.dart';
-import 'package:jaguar_jwt/jaguar_jwt.dart';
 import 'package:mongo_dart/mongo_dart.dart';
-import '../../config/config.dart';
 import '../../helpers/helpers.dart';
 import '../../models/models.dart';
 import '../_middleware.dart';
@@ -48,7 +46,7 @@ Future<Response> onRequest(RequestContext context) async {
         );
       }
       final foundUserId = (foundUser['_id'] as ObjectId).$oid;
-      final token = issueJWTToken(foundUserId);
+      final token = issueToken(foundUserId);
 
       await mongoDbService.close();
 
@@ -78,17 +76,4 @@ Future<Response> onRequest(RequestContext context) async {
       },
     );
   }
-}
-
-String issueJWTToken(String usedId) {
-  final claimSet = JwtClaim(
-    subject: usedId,
-    issuer: 'karokojnr',
-    otherClaims: <String, dynamic>{
-      'type': 'authenticationresponse',
-    },
-    maxAge: const Duration(hours: 24),
-  );
-  final token = issueJwtHS256(claimSet, Config.jwtSecret);
-  return token;
 }

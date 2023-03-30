@@ -20,3 +20,16 @@ Middleware authorize() {
     }
   });
 }
+
+String issueToken(String usedId) {
+  final claimSet = JwtClaim(
+    subject: usedId,
+    issuer: 'karokojnr',
+    otherClaims: <String, dynamic>{
+      'type': 'authenticationresponse',
+    },
+    maxAge: const Duration(hours: 24),
+  );
+  final token = issueJwtHS256(claimSet, Config.jwtSecret);
+  return token;
+}
