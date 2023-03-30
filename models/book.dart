@@ -32,8 +32,8 @@ List<Map<String, dynamic>> books = [
     'authors': ['Lee Njiru']
   },
   {
-    'title': "President's Pressman",
-    'authors': ['Lee Njiru']
+    'title': 'Lolita',
+    'authors': ['Vladimir Nabokov']
   },
   {
     'title': 'Always start with why',
